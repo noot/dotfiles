@@ -12,7 +12,8 @@
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:monospace 8
-font pango: Dejavu Mono 10
+#font pango: Dejavu Mono 10
+font pango:ypn envypn 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -26,8 +27,20 @@ font pango: Dejavu Mono 10
 # font, it doesn't scale on retina/hidpi displays.
 
 # i3-gaps
-gaps inner 15
-gaps outer 30
+gaps inner 0 
+gaps outer 0
+
+# remove top bar of windows
+new_window 1pixel
+
+# transparency
+exec --no-startup-id compton -i 0.7 
+
+bindsym Mod1+t exec compton -i 0.7
+bindsym Mod1+Shift+t exec killall compton
+
+# suspend
+bindsym Mod1+Ctrl+s exec systemctl suspend
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
@@ -40,7 +53,10 @@ set $right semicolon
 floating_modifier Mod1
 
 # start a terminal
+#bindsym Mod1+Return exec xterm 
 bindsym Mod1+Return exec i3-sensible-terminal
+bindsym Mod1+Return+Shift exec i3-sensible-terminal -name floating
+for_window [class="i3-sensible-terminal" instance="floating"] floating enable border pixel 3
 
 # kill focused window
 bindsym Mod1+Shift+q kill
@@ -203,10 +219,10 @@ bar {
     separator #666666
     background #000000
     statusline #ffffff
-    focused_workspace #4c7899 #285577 #ffffff
-    active_workspace #333333 #5f676a #ffffff
+    focused_workspace #4c7899 #7255f7  #ffffff
+    active_workspace #333333 #7255f7 #ffffff
     inactive_workspace #333333 #222222 #888888
-    urgent_workspace #2f343a #900000 #ffffff
+    urgent_workspace #7255f7 #900000 #ffffff
   }
 }
 
@@ -221,7 +237,7 @@ bar {
 #######################################################################
 exec i3-config-wizard
 
-client.focused #4c7899 #285577 #ffffff #2e9ef4
+client.focused #5038bc #21368c #ffffff #21368c 
 client.focused_inactive #333333 #5f676a #ffffff #484e50
 client.unfocused #333333 #222222 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
