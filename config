@@ -34,13 +34,19 @@ gaps outer 0
 new_window 1pixel
 
 # transparency
-exec --no-startup-id compton -i 0.7 
+exec --no-startup-id compton -i 0.8 
 
-bindsym Mod1+t exec compton -i 0.7
+bindsym Mod1+t exec compton -i 0.8
 bindsym Mod1+Shift+t exec killall compton
 
 # suspend
 bindsym Mod1+Ctrl+s exec systemctl suspend
+
+#lock
+bindsym Mod1+Ctrl+l exec killall compton && i3lock -i Pictures/sunset_3440x1440_by_axiomdesign-dazvjl3.png && playerctl pause 
+
+# screenshot
+bindsym Mod1+Print exec --no-startup-id xfce4-screenshooter
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
@@ -163,8 +169,8 @@ bindsym Mod1+Shift+9 move container to workspace $ws9
 bindsym Mod1+Shift+0 move container to workspace $ws10
 
 # brightness buttons
-bindsym XF86MonBrightnessUp exec light -A 20 
-bindsym XF86MonBrightnessDown exec light -U 20
+bindsym XF86MonBrightnessUp exec light -A 10 
+bindsym XF86MonBrightnessDown exec light -U 10
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -224,6 +230,9 @@ bar {
     inactive_workspace #333333 #222222 #888888
     urgent_workspace #7255f7 #900000 #ffffff
   }
+  mode hide
+  hidden_state hide
+  modifier Mod4
 }
 
 #######################################################################
@@ -237,7 +246,7 @@ bar {
 #######################################################################
 exec i3-config-wizard
 
-client.focused #5038bc #21368c #ffffff #21368c 
+client.focused #000000 #5A3D85 #ffffff #21368c 
 client.focused_inactive #333333 #5f676a #ffffff #484e50
 client.unfocused #333333 #222222 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
