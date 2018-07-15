@@ -48,6 +48,9 @@ bindsym Mod1+Ctrl+l exec killall compton && i3lock -i Pictures/sunset_3440x1440_
 # screenshot
 bindsym Mod1+Print exec --no-startup-id xfce4-screenshooter
 
+# kill nautilus
+bindsym Mod1+k+l exec killall nautilus
+
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
 set $up l
