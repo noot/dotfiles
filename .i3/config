@@ -27,11 +27,14 @@ font pango:ypn envypn 10
 # font, it doesn't scale on retina/hidpi displays.
 
 # i3-gaps
-gaps inner 0 
-gaps outer 0
+#gaps inner 0 
+#gaps outer 0
 
 # remove top bar of windows
 new_window 1pixel
+
+#background~
+exec --no-startup-id feh --bg-fill Pictures/sunset_3440x1440_by_axiomdesign-dazvjl3.png
 
 # transparency
 exec --no-startup-id compton -i 0.8 
@@ -40,7 +43,7 @@ bindsym Mod1+t exec compton -i 0.8
 bindsym Mod1+Shift+t exec killall compton
 
 # suspend
-bindsym Mod1+Ctrl+s exec systemctl suspend
+#bindsym Mod1+Ctrl+s exec systemctl suspend
 
 #lock
 bindsym Mod1+Ctrl+l exec killall compton && i3lock -i Pictures/sunset_3440x1440_by_axiomdesign-dazvjl3.png && playerctl pause 
@@ -171,6 +174,14 @@ bindsym Mod1+Shift+8 move container to workspace $ws8
 bindsym Mod1+Shift+9 move container to workspace $ws9
 bindsym Mod1+Shift+0 move container to workspace $ws10
 
+# move workspace to output
+bindsym Mod1+Ctrl+Shift+l move workspace to output left
+bindsym Mod1+Ctrl+Shift+k move workspace to output right
+
+# switch outputs
+bindsym Mod1+Shift+w focus output eDP-1
+bindsym Mod1+Shift+m focus output HDMI-1
+
 # brightness buttons
 bindsym XF86MonBrightnessUp exec light -A 10 
 bindsym XF86MonBrightnessDown exec light -U 10
@@ -247,7 +258,7 @@ bar {
 #
 # Please remove the following exec line:
 #######################################################################
-exec i3-config-wizard
+#exec i3-config-wizard
 
 client.focused #000000 #5A3D85 #ffffff #21368c 
 client.focused_inactive #333333 #5f676a #ffffff #484e50
