@@ -27,7 +27,7 @@ font pango:ypn envypn 10
 # font, it doesn't scale on retina/hidpi displays.
 
 # i3-gaps
-#gaps inner 0 
+gaps inner 15 
 #gaps outer 0
 
 # remove top bar of windows
@@ -37,9 +37,9 @@ new_window 1pixel
 exec --no-startup-id feh --bg-fill Pictures/sunset_3440x1440_by_axiomdesign-dazvjl3.png
 
 # transparency
-exec --no-startup-id compton -i 0.8 
+exec --no-startup-id compton -i 0.7
 
-bindsym Mod1+t exec compton -i 0.8
+bindsym Mod1+t exec compton -i 0.7
 bindsym Mod1+Shift+t exec killall compton
 
 # suspend
@@ -216,10 +216,6 @@ mode "resize" {
         bindsym $down       resize grow height 10 px or 10 ppt
         bindsym $up         resize shrink height 10 px or 10 ppt
         bindsym $right      resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
         bindsym Up          resize shrink height 10 px or 10 ppt
         bindsym Right       resize grow width 10 px or 10 ppt
 
