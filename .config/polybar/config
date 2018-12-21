@@ -17,33 +17,30 @@
 ;==========================================================
 
 [colors]
-;black
-c1 = #000
-;dark purple
-c2 = #3A1C85
-;dark maroon
-c3 = #690E4D
-;light purple
-c4 = #D6C7FC
-;light pink
-c5 = #FCC7F4
-;medium purple
-c6 = #8664DE
-;pale purple
-c7 = #EAE3FC
+black = #000
+dpurple = #3A1C85
+maroon = #690E4D
+lpurple = #D6C7FC
+lpink = #FCC7F4
+mpurple = #8664DE
+peach = #FF82A1
+lblue = #B8C3FC
+mint = #A6FFE6
+magenta = #FF8FD8
 
 background = #000
-background-alt = ${colors.c2}
-foreground = ${colors.c7}
-foreground-alt = ${colors.c6}
+background-alt = ${colors.dpurple}
+;foreground = ${colors.lpurple}
+foreground = #EAE3FC
+foreground-alt = ${colors.lpink}
 primary = #000
-secondary = ${colors.c3}
+secondary = ${colors.maroon}
 alert = #F23876
 
 [bar/e]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 20
+height = 22
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 6.0
@@ -62,7 +59,7 @@ border-color = #00000000
 
 padding-left = 0
 padding-right = 2
-padding-top = 0
+padding-top = 5
 
 module-margin-left = 1
 module-margin-right = 2
@@ -74,7 +71,7 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
 modules-center = 
-modules-right = filesystem wlan eth memory cpu battery temperature date powermenu
+modules-right = wlan eth filesystem memory cpu battery temperature date pulseaudio powermenu
 
 tray-position = right
 tray-padding = 2
@@ -120,8 +117,10 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
+;mount-1 = /home
+mount-2 = /media/elizabeth
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted =  %{F$#fff}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -239,18 +238,18 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = 
+interface = wlp2s0 
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #000
-label-connected = %essid%
+label-connected = ☀ %essid% %signal%% %upspeed% %downspeed%
+label-connected-foreground = ${colors.lblue}
 
-format-disconnected =
-;format-disconnected = <label-disconnected>
+format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+label-disconnected = %ifname% disconnected
+label-disconnected-foreground = ${colors.peach}
 
 ramp-signal-0 = 
 ramp-signal-1 = 
@@ -261,7 +260,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = 
+interface = enp0s31f6 
 interval = 3.0
 
 format-connected-underline = #000
@@ -298,10 +297,10 @@ format-volume = <label-volume> <bar-volume>
 label-volume = VOL %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted = 🔇 muted
+label-muted = muted
 label-muted-foreground = #666
 
-bar-volume-width = 10
+bar-volume-width = 5
 bar-volume-foreground-0 = #55aa55
 bar-volume-foreground-1 = #55aa55
 bar-volume-foreground-2 = #55aa55
@@ -353,13 +352,13 @@ adapter = AC
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = #D6C7FC
+format-charging-underline = ${colors.mpurple}
 
 format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+format-discharging-underline = ${colors.peach}
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-prefix-foreground = ${colors.lpurple}
 format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
@@ -370,7 +369,7 @@ ramp-capacity-foreground = ${colors.foreground-alt}
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-foreground = ${colors.peach}
 animation-charging-framerate = 750
 
 animation-discharging-0 = 
@@ -385,7 +384,7 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
-format-underline = #f50a4d
+;format-underline = ${colors.maroon}
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
