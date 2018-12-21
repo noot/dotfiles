@@ -31,7 +31,9 @@ gaps inner 15
 #gaps outer 0
 
 # remove top bar of windows
-new_window 1pixel
+default_border none
+default_floating_border none
+hide_edge_borders both
 
 #background~
 exec --no-startup-id feh --bg-fill Pictures/sunset_3440x1440_by_axiomdesign-dazvjl3.png
@@ -183,8 +185,8 @@ bindsym Mod1+Shift+w focus output eDP-1
 bindsym Mod1+Shift+m focus output HDMI-1
 
 # brightness buttons
-bindsym XF86MonBrightnessUp exec light -A 10 
-bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86MonBrightnessUp exec light -A 3 
+bindsym XF86MonBrightnessDown exec light -U 3
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
