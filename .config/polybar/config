@@ -71,9 +71,9 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
-modules-center = 
+modules-center =  
 ;modules-right = wlan eth filesystem memory cpu battery temperature date backlight pulseaudio powermenu
-modules-right = wlan eth battery date backlight pulseaudio
+modules-right = spotify wlan eth battery date crypto backlight pulseaudio
 
 tray-position = right
 tray-padding = 2
@@ -94,11 +94,24 @@ tray-transparent = true
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[module/spotify]
+type = custom/script
+interval = 1
+;format-prefix = "spotify ~"
+format = <label>
+exec = python ~/.config/polybar/scripts/spotify.py
+format-underline = ${colors.mint}
+
+[module/crypto]
+type = custom/script
+interval = 500
+exec = ~/.config/polybar/crypto.py
+
 [module/openweathermap]
 type = custom/script
 exec = ~/.config/polybar/scripts/openweathermap.sh
 interval = 1000
-label-font = 0
+label-font = 3
 
 [module/backlight]
 type = internal/backlight
