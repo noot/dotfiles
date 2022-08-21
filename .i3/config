@@ -36,7 +36,7 @@ default_floating_border none
 hide_edge_borders both
 
 #background~
-exec --no-startup-id feh --bg-fill Pictures/sunset_3440x1440_by_axiomdesign-dazvjl3.png
+exec --no-startup-id feh --bg-fill Pictures/lightning.jpg
 
 # transparency
 exec --no-startup-id compton -i 0.7
@@ -48,7 +48,7 @@ bindsym Mod1+Shift+t exec killall compton
 #bindsym Mod1+Ctrl+s exec systemctl suspend
 
 #lock
-bindsym Mod1+Ctrl+l exec killall compton && i3lock -i Pictures/sunset_3440x1440_by_axiomdesign-dazvjl3.png && playerctl pause 
+bindsym Mod1+Ctrl+l exec killall compton && i3lock -i Pictures/lightning.jpg && playerctl pause 
 
 # screenshot
 bindsym Mod1+Print exec --no-startup-id xfce4-screenshooter
@@ -189,9 +189,9 @@ bindsym XF86MonBrightnessUp exec light -A 3
 bindsym XF86MonBrightnessDown exec light -U 3
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
 # Spotify related key bindings
 bindsym Mod1+x exec playerctl pause
