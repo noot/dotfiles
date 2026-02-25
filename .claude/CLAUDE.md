@@ -3,17 +3,7 @@
 ## Metaprompting
 
 If I give you a bad prompt, suggest an improved version of the prompt and ask me to confirm.
-
 You can improve the prompt by making it more specific. If the solution is complex, encourage thinking and creating a step-by-step plan.
-
-When you are suggesting an improved prompt, explicitly say "PROMPT SUGGESTION".
-
-Examples:
-
-Poor	Good
-add tests for foo.py	write a new test case for foo.py, covering the edge case where the user is logged out. avoid mocks
-why does ExecutionFactory have such a weird api?	look through ExecutionFactory's git history and summarize how its api came to be
-add a calendar widget	look at how existing widgets are implemented on the home page to understand the patterns and specifically how code and interfaces are separated out. HotDogWidget.php is a good example to start with. then, follow the pattern to implement a new calendar widget that lets the user select a month and paginate forwards/backwards to pick a year. Build from scratch without libraries other than the ones already used in the rest of the codebase.
 
 ## Git branches
 
@@ -23,9 +13,10 @@ For example: `claude-fix-clippy`, `claude-issue-88`, `claude-feat-description`
 
 ## General 
 
-1. Do not write comments unless the code is unusually complex, or is required by clippy.
-2. Do not write unused code. Only implement code that will actually be called.
-3. Do not change the code for the purpose of tests. The code should be testable, but it should not contain code that is *only* for testing purposes. For example, making a field optional, and always setting it in the code path, but setting it to `None` for tests. In this case, the field should not be optional and just be the type it's set to in the code path.
+- do not write comments unless the code is unusually complex, or is required by clippy.
+- comments and logs are lowercase. Only make doc comments (public) uppercase.
+- do not write unused code. Only implement code that will actually be called.
+- do not change the code for the purpose of tests. The code should be testable, but it should not contain code that is *only* for testing purposes. For example, making a field optional, and always setting it in the code path, but setting it to `None` for tests. In this case, the field should not be optional and just be the type it's set to in the code path.
 
 ## Rust best practices
 
@@ -33,7 +24,7 @@ For example: `claude-fix-clippy`, `claude-issue-88`, `claude-feat-description`
 Only make things `pub` if they need to be used by external crates.
 Only make things `pub(crate)` if they need to be used by external modules within the same crate.
 
-2. Do not use `unwrap()` or `expect()`. An error should be returned instead. The only exception is for invariants, which must be documented. For example, getting and unwrapping a value from a map where it is known that it must be `Some`.
+2. Do not use `unwrap()` or `expect()`. An error should be returned instead. The only exception is for invariants, which must be documented. For example, getting and unwrapping a value from a map where it is known that it must be `Some`. In this case, be specific as to why this is an invariant in the `expect()` message.
 
 3. Errors should provide as much context as possible. Errors in binary crates should be wrapped with `wrap_err()` to provide additional context. Errors in library crates must be fully typed and not use `eyre` or `anyhow`.
 
@@ -139,19 +130,25 @@ struct Service {
 }
 ```
 
+6. When importing traits and not using them explicity, write `use SomeTrait as _;`.
+
 ## Clippy
 
-See `.claude/commands/clippy.md`.
+After every change you make, check that the code compiles with `cargo c --tests`.
+If it doesn't, fix your errors before proceeding.
+
+Once everything compiles, run `cargo fmt` and clippy.
+If there are any clippy errors, fix them before proceeding.
 
 ### Quick Fix Commands
 
 ```bash
-cargo clippy -- --warn clippy::pedantic
-
-# Auto-fix what can be automatically fixed (limited for pedantic)
-cargo clippy --fix --allow-dirty -- --warn clippy::pedantic
-
 # Check build
 cargo c --tests
+
+cargo clippy --all-features
+
+# Auto-fix what can be automatically fixed
+cargo clippy --fix --allow-dirty --all-features
 ```
 
