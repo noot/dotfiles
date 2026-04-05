@@ -130,7 +130,7 @@ mode "resize" {
 bindsym Mod1+r mode "resize"
 
 bar {
-        status_command i3status
+        status_command ~/.config/sway/status.sh
         colors {
                 separator #666666
                 background #000000
