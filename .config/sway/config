@@ -10,6 +10,7 @@ hide_edge_borders both
 
 exec swaybg -i debian.png -m fill
 exec python3 ~/.config/sway/inactive-opacity.py 0.8
+exec gammastep -t 6500K:4000K -l geoclue2
 
 bindsym Mod1+Print exec xfce4-screenshooter
 
