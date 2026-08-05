@@ -47,7 +47,10 @@ while true; do
     vol=$(pactl get-sink-volume @DEFAULT_SINK@ 2>/dev/null | grep -oP '\d+%' | head -1)
     vol=${vol:+,\{\"full_text\":\" vol: $vol \",\"color\":\"$PURPLE\"\}}
 
+    sun=$(python3 ~/.config/sway/sun.py 2>/dev/null)
+    sun=${sun:+,\{\"full_text\":\" $sun \",\"color\":\"$PURPLE\"\}}
+
     date_str=$(date '+%a %b %d %H:%M')
 
-    echo ",[{\"full_text\":\" cpu: ${cpu_val}% \",\"color\":\"${cpu_color}\"},{\"full_text\":\" mem: ${mem_val}% \",\"color\":\"${mem_color}\"},{\"full_text\":\" disk: ${disk_text} \",\"color\":\"${disk_color}\"},{\"full_text\":\" net: ${net} \",\"color\":\"${net_color}\"}${bat}${vol},{\"full_text\":\" ${date_str} \",\"color\":\"${PINK}\"}]"
+    echo ",[{\"full_text\":\" cpu: ${cpu_val}% \",\"color\":\"${cpu_color}\"},{\"full_text\":\" mem: ${mem_val}% \",\"color\":\"${mem_color}\"},{\"full_text\":\" disk: ${disk_text} \",\"color\":\"${disk_color}\"},{\"full_text\":\" net: ${net} \",\"color\":\"${net_color}\"}${bat}${vol}${sun},{\"full_text\":\" ${date_str} \",\"color\":\"${PINK}\"}]"
 done
